@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<body id="main">
+    <div class="row text-center">
+        <h1 class="display-4">Bienvenu sur la boutique en ligne de GOASS!</h1>
+        <br />
+        <div class="card col-md-4 col-sm-10 rounded m-auto" style="background-color: lightgrey;">
+            <div class="card-header" style="background-color: lightgrey; border: none;">
+                <h5 class="card-title">Veuillez vous connecter pour continuer!</h5>
+            </div>
+            <div class="card-body" style="background-color: lightgrey; border: none;">
+                <p>Afin d'accéder à toutes les fonctionnalités</p>
+            </div>
+            <div class="card-footer" style="background-color: lightgrey; border: none;">
+                <br />
+                <div class="row m-auto">
+                    <a asp-area="Identity" asp-page="/Account/Login" class="myButtonSuccess"><i class="fa-solid fa-right-to-bracket text-light"></i> Sign-in </a>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="myButtonCenter"><i class="fa-solid fa-id-card text-light"></i> Sign-up</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card col-md-6 col-sm-10 rounded m-auto" style="background-color: lightgrey;">
+            <div class="card-header" style="background-color: lightgrey; border: none;">
+                <h5 class="card-title">Notre boutique en ligne</h5>
+            </div>
+            <div class="card-body" style="background-color: lightgrey; border: none;">
+                <p>La plus grande sélection d'équipement de sport pour tout les âges. Faites nous confiance pour tout vos besoins en matière de hockey, soccer, baseball et vélo. Nous offrons des services de réparations du Lundi aux Vendredis de 9 à 21h. Notre équipe d'experts vous attends pour vous conseiller!</p>
+            </div>
+            <div class="card-footer" style="background-color: lightgrey; border: none;">
+                <div class="row m-auto">
+                    <a class="myButtonCenter" href="~/pdf/Atelier.pdf">
+                        <i class="fa-solid fa-screwdriver-wrench text-light"></i>
+                        Réparations
+                    </a>
+                    <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-medal text-light"></i> Catalogue</a>
+                    <a class="myButtonCenter" asp-area="" asp-controller="Home" asp-action="Info"><i class="fa-solid fa-circle-info text-light"></i> À Propos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,72 @@
+﻿@model GOASS.Models.Produit
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Modifier</h1>
+
+<h4>Produit</h4>
+<hr />
+<div class="row" style="background-color:white;">
+    <br />
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProduitID" />
+            <input type="hidden" asp-for="ImageID" />
+            <div class="form-group">
+                <label asp-for="NomProduit" class="control-label"></label>
+                <input asp-for="NomProduit" class="form-control" />
+                <span asp-validation-for="NomProduit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Marque" class="control-label"></label>
+                <input asp-for="Marque" class="form-control" />
+                <span asp-validation-for="Marque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taille" class="control-label"></label>
+                <input asp-for="Taille" class="form-control" />
+                <span asp-validation-for="Taille" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantité" class="control-label"></label>
+                <input asp-for="Quantité" class="form-control" />
+                <span asp-validation-for="Quantité" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sport" class="control-label"></label>
+                <input asp-for="Sport" class="form-control" />
+                <span asp-validation-for="Sport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input type="file" name="ImgProduit" accept="image/*" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Prix" class="control-label"></label>
+                <input asp-for="Prix" class="form-control" />
+                <span asp-validation-for="Prix" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="Save" class="myButtonSuccess" />
+                <a class="myButtonCenter" asp-action="Index">Retour aux produits</a>
+            </div>
+            <div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

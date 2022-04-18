@@ -1,0 +1,142 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+#main {
+    background-image: url(/img/Stade.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    background-color:white;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      white-space: nowrap;
+      line-height: 60px; /* Vertically center the text there */
+}
+.myButtonCenter {
+    background: linear-gradient(to bottom, #00ccff 5%, #019ad2 100%);
+    background-color: #00ccff;
+    border-radius: 2px;
+    border: 1px solid #057fd0;
+    /* display:inline-block; */
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Trebuchet MS;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 7px 16px;
+    text-decoration: none;
+    /* text-shadow:0px 1px 1px #5b6178; */
+    margin: 0 0 10px 20px;
+}
+
+.myButtonCenter:hover {
+    background: linear-gradient(to bottom, #019ad2 5%, #00ccff 100%);
+    background-color: #019ad2;
+}
+
+.myButtonCenter:active {
+    position: relative;
+    top: 1px;
+}
+
+.myButtonSuccess {
+    background: linear-gradient(to bottom, #05e435 5%, #108002 100%);
+    background-color: #026b10;
+    border-radius: 2px;
+    border: 1px solid #014215;
+    /* display:inline-block; */
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Trebuchet MS;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 7px 16px;
+    text-decoration: none;
+    /* text-shadow:0px 1px 1px #5b6178; */
+    margin: 0 0 10px 20px;
+}
+
+.myButtonSuccess:hover {
+    color: white;
+    background: linear-gradient(to bottom, #02a826 5%, #1deb02 100%);
+    background-color: #004216;
+}
+
+.myButtonSuccess:active {
+    position: relative;
+    top: 1px;
+}
+
+#login {
+    background-color: white;
+}
+
+.table {
+    background-color: white;
+}
+
+h1{
+    text-align:center;
+}

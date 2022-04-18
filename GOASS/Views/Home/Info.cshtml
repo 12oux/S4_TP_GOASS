@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "À Propos";
+    Layout = "_Layout";
+}
+<h1> @ViewData["Title"]</h1>
+<br />
+<div class="text-center text-dark col-md-6 col-sm-10 m-auto rounded" style="background-color: lightgrey;">
+    <h2 class="display-4">Greatest of all Sports Store</h2>
+    <p>
+        Depuis 1987, la famille Cyr est réputée pour offrir un service personnalisé et de qualité.
+        Celle-ci se fait un devoir de vous conseiller adéquatement pour vos besoins en matière d’équipement
+        sportif pour vous et votre famille. Venez nous rencontrer et soyez assuré que vous serez traité avec soin
+        par un de nos dévoués employés.
+    </p>
+    <br />
+    <div class="row m-auto">
+        <a class="myButtonCenter" href="~/pdf/Atelier.pdf">
+            <i class="fa-solid fa-screwdriver-wrench text-light"></i>
+            Réparations
+        </a>
+        <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-medal text-light"></i> Catalogue</a>
+    </div>
+</div>

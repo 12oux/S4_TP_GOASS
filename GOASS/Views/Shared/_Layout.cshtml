@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GOASS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+</head>
+<body id="main">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-store fa-lg"></i>GOASS</a>
+                <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fa-solid fa-house text-light"></i>
+                                Home
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Info">
+                                <i class="fa-solid fa-circle-info text-light"></i>
+                                À Propos
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown show bg-dark">
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-medal text-light"></i>
+                                Produits
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-hockey-puck"></i>&nbsp; Hockey</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-futbol"></i>&nbsp; Soccer</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-baseball-bat-ball"></i> Baseball</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-bicycle"></i>&nbsp; Vélo</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Panier" asp-action="Details">
+                                <i class="fa-solid fa-cart-shopping text-light"></i>
+                                Panier
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Eval" asp-action="Index">
+                                <i class="fa-solid fa-star-half-stroke text-light"></i>
+                                Évaluation
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="~/pdf/Atelier.pdf">
+                                <i class="fa-solid fa-screwdriver-wrench text-light"></i>
+                                Réparations
+                            </a>
+                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Paiement" asp-action="Historique">Historique</a>
+                         </li>*@
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-dark">
+        <div class="container text-light">
+            &copy; Benoit Robichaud 2022&emsp;&emsp; - &emsp;&emsp;Dans le cadre du cour FC 420-306-AH&emsp;&emsp; - &emsp;&emsp;Greatest Of All Sports Store&emsp;&emsp; - &emsp;&emsp;<a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
