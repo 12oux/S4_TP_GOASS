@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GOASS.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
 
 namespace GOASS.Controllers
 {
@@ -63,10 +64,24 @@ namespace GOASS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EvalID,NomClient,PrenomClient,Email,Comment")] Eval eval)
         {
+      
             if (ModelState.IsValid)
             {
                 _context.Add(eval);
                 await _context.SaveChangesAsync();
+
+                SmtpClient smtpClient = new SmtpClient("smtp.office365.com", 587);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new System.Net.NetworkCredential("courrielTI@cstjean.qc.ca", "3ordercharactercorn67winwest");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("courrielTI@cstjean.qc.ca", "Courriel TI");
+                mail.To.Add(new MailAddress("b.robichaud12@gmail.com"));
+                mail.Subject = "Vous avez reçu un nouveau commentaire!";
+                mail.Body = "Le nouveau commentaire provient de" + eval.NomClient + eval.PrenomClient;
+                smtpClient.Send(mail);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(eval);
@@ -156,5 +171,7 @@ namespace GOASS.Controllers
         {
             return _context.Eval.Any(e => e.EvalID == id);
         }
+
+        
     }
 }

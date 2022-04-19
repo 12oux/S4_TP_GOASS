@@ -1,0 +1,61 @@
+﻿@model IEnumerable<GOASS.Models.ItemCommande>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Commandes</h1>
+
+<p>
+    <a class="myButtonCenter" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Produit.NomProduit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Commande)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontantUnitaire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produit)
+            </th>
+            <th>
+                Options Admin
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produit.NomProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commande.CommandeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontantUnitaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produit.ProduitID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ItemCommandeID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ItemCommandeID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItemCommandeID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

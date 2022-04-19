@@ -40,6 +40,46 @@ namespace GOASS.Data.Migrations
                     b.ToTable("Image");
                 });
 
+            modelBuilder.Entity("GOASS.Models.ItemPanier", b =>
+                {
+                    b.Property<int>("ItemPanierID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PanierID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProduitID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantite")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemPanierID");
+
+                    b.HasIndex("PanierID");
+
+                    b.HasIndex("ProduitID");
+
+                    b.ToTable("ItemPanier");
+                });
+
+            modelBuilder.Entity("GOASS.Models.Panier", b =>
+                {
+                    b.Property<int>("PanierID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserGuid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PanierID");
+
+                    b.ToTable("Panier");
+                });
+
             modelBuilder.Entity("GOASS.Models.Produit", b =>
                 {
                     b.Property<int>("ProduitID")
@@ -58,6 +98,9 @@ namespace GOASS.Data.Migrations
 
                     b.Property<string>("NomProduit")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Prix")
+                        .HasColumnType("float");
 
                     b.Property<int?>("ProduitID1")
                         .HasColumnType("int");
@@ -223,12 +266,10 @@ namespace GOASS.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -265,12 +306,10 @@ namespace GOASS.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -278,6 +317,25 @@ namespace GOASS.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("GOASS.Models.ItemPanier", b =>
+                {
+                    b.HasOne("GOASS.Models.Panier", "Panier")
+                        .WithMany("ItemPanier")
+                        .HasForeignKey("PanierID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GOASS.Models.Produit", "Produit")
+                        .WithMany("ItemPanier")
+                        .HasForeignKey("ProduitID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Panier");
+
+                    b.Navigation("Produit");
                 });
 
             modelBuilder.Entity("GOASS.Models.Produit", b =>
@@ -344,8 +402,15 @@ namespace GOASS.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GOASS.Models.Panier", b =>
+                {
+                    b.Navigation("ItemPanier");
+                });
+
             modelBuilder.Entity("GOASS.Models.Produit", b =>
                 {
+                    b.Navigation("ItemPanier");
+
                     b.Navigation("Produits");
                 });
 #pragma warning restore 612, 618

@@ -5,31 +5,32 @@
     <div class="row text-center">
         <h1 class="display-4">Bienvenu sur la boutique en ligne de GOASS!</h1>
         <br />
-        <div class="card col-md-4 col-sm-10 rounded m-auto" style="background-color: lightgrey;">
-            <div class="card-header" style="background-color: lightgrey; border: none;">
-                <h5 class="card-title">Veuillez vous connecter pour continuer!</h5>
+        <div class="card col-md-4 col-sm-10 rounded m-auto text-center" style="background-color: #161c2d;">
+            <div class="card-header text-light" style="background-color: #161c2d; border: none;">
+                <h5 class="card-title  text-light">Veuillez vous connecter pour continuer!</h5>
             </div>
-            <div class="card-body" style="background-color: lightgrey; border: none;">
+            <div class="card-body text-light text-center" style="background-color: #161c2d; border: none;">
                 <p>Afin d'accéder à toutes les fonctionnalités</p>
             </div>
-            <div class="card-footer" style="background-color: lightgrey; border: none;">
+            <div class="card-footer text-light text-center" style="background-color: #161c2d; border: none;">
                 <br />
-                <div class="row m-auto">
+                <div class="row m-auto text-center">
                     <a asp-area="Identity" asp-page="/Account/Login" class="myButtonSuccess"><i class="fa-solid fa-right-to-bracket text-light"></i> Sign-in </a>
                     <a asp-area="Identity" asp-page="/Account/Register" class="myButtonCenter"><i class="fa-solid fa-id-card text-light"></i> Sign-up</a>
                 </div>
             </div>
         </div>
         <br />
-        <div class="card col-md-6 col-sm-10 rounded m-auto" style="background-color: lightgrey;">
-            <div class="card-header" style="background-color: lightgrey; border: none;">
-                <h5 class="card-title">Notre boutique en ligne</h5>
+        <br />
+        <div class="card col-md-6 col-sm-10 rounded m-auto text-light text-center" style="background-color: #161c2d;">
+            <div class="card-header text-light text-center" style="background-color: #161c2d; border: none;">
+                <h5 class="card-title text-light text-center">Notre boutique en ligne</h5>
             </div>
-            <div class="card-body" style="background-color: lightgrey; border: none;">
+            <div class="card-body text-light text-center" style="background-color: #161c2d; border: none;">
                 <p>La plus grande sélection d'équipement de sport pour tout les âges. Faites nous confiance pour tout vos besoins en matière de hockey, soccer, baseball et vélo. Nous offrons des services de réparations du Lundi aux Vendredis de 9 à 21h. Notre équipe d'experts vous attends pour vous conseiller!</p>
             </div>
-            <div class="card-footer" style="background-color: lightgrey; border: none;">
-                <div class="row m-auto">
+            <div class="card-footer text-light text-center" style="background-color: #161c2d; border: none;">
+                <div class="row m-auto text-light text-center">
                     <a class="myButtonCenter" href="~/pdf/Atelier.pdf">
                         <i class="fa-solid fa-screwdriver-wrench text-light"></i>
                         Réparations
@@ -40,4 +41,49 @@
             </div>
         </div>
     </div>
+    <br />
+    <br />
+    <div class="row m-auto">
+        <div class="card col-md-3 col-sm-12 text-center" style="background-color: #161c2d;">
+            <div class="card-header">
+                <a asp-area="" asp-controller="Produit" asp-action="Hockey">
+                    <img src="/img/H.jpg" alt="Hockey" height="150" width="200" class="m-auto" />
+                </a>
+            </div>
+            <div class="card-footer text-light">
+                Équipement de Hockey
+            </div>
+        </div>
+        <div class="card col-md-3 col-sm-12 text-center" style="background-color: #161c2d;">
+            <div class="card-header">
+                <a asp-area="" asp-controller="Produit" asp-action="Soccer">
+                    <img src="/img/S.jpg" alt="Soccer" height="150" width="200" class="m-auto" />
+                </a>
+            </div>
+            <div class="card-footer text-light">
+                Équipement de Soccer
+            </div>
+        </div>
+        <div class="card col-md-3 col-sm-12 text-center" style="background-color: #161c2d;">
+            <div class="card-header">
+                <a asp-area="" asp-controller="Produit" asp-action="Baseball">
+                    <img src="/img/BB.jpg" alt="Baseball" height="150" width="200" class="m-auto" />
+                </a>
+            </div>
+            <div class="card-footer text-light">
+                Équipement de Baseball
+            </div>
+        </div>
+        <div class="card col-md-3 col-sm-12 text-center" style="background-color: #161c2d;">
+            <div class="card-header">
+                <a asp-area="" asp-controller="Produit" asp-action="Velo">
+                    <img src="/img/V.jpg" alt="Velo" height="150" width="200" class="m-auto" />
+                </a>
+            </div>
+            <div class="card-footer text-light">
+                Équipement de Vélo
+            </div>
+        </div>
+    </div>
+    <br />
 </body>

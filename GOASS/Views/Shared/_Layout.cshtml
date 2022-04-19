@@ -10,22 +10,15 @@
 </head>
 <body id="main">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-store fa-lg"></i>GOASS</a>
+                <a class="navbar-brand text-light text-left" asp-area="" asp-controller="Home" asp-action="Index"><img src="/img/logo.png" alt="Logo" height="75" width="75"/>GOASS</a>
                 <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-xl-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i class="fa-solid fa-house text-light"></i>
-                                Home
-                            </a>
-
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Info">
                                 <i class="fa-solid fa-circle-info text-light"></i>
@@ -38,10 +31,10 @@
                                 Produits
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-hockey-puck"></i>&nbsp; Hockey</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-futbol"></i>&nbsp; Soccer</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-baseball-bat-ball"></i> Baseball</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Index"><i class="fa-solid fa-bicycle"></i>&nbsp; Vélo</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Hockey"><i class="fa-solid fa-hockey-puck"></i>&nbsp; Hockey</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Soccer"><i class="fa-solid fa-futbol"></i>&nbsp; Soccer</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Baseball"><i class="fa-solid fa-baseball-bat-ball"></i> Baseball</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Produit" asp-action="Velo"><i class="fa-solid fa-bicycle"></i>&nbsp; Vélo</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -62,9 +55,12 @@
                                 Réparations
                             </a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Paiement" asp-action="Historique">Historique</a>
-                         </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ItemCommande" asp-action="Index">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                Historique
+                            </a>
+                         </li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using GOASS.Models;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GOASS.Controllers
 {
+    [Authorize]
     public class ProduitController : Controller
     {
         private readonly ProduitContext _context;
@@ -29,15 +31,41 @@ namespace GOASS.Controllers
             return View(await _context.Produit.Include(x => x.Image).ToListAsync());
         }
 
-        //public async Task<IActionResult> Hockey(Produit produit)
-        //{
-        //    var produits = Produit.All();
-        //    var queryHockey = from items in produits
-        //                      where Produit.Sport == "Hockey"
-        //                      select items;
-        //    return View(await _context.Produit.Include(x => x.Image).ToListAsync());
-        //}
-        // GET: Produit/Details/5
+        public async Task<IActionResult> Hockey(Produit produit)
+        {
+            var queryHockey = from items in _context.Produit
+                              where items.Sport == "Hockey"
+                              select items;
+            return View(await (queryHockey).Include(x => x.Image).ToListAsync());
+
+        }
+        public async Task<IActionResult> Soccer(Produit produit)
+        {
+            var querySoccer = from items in _context.Produit
+                              where items.Sport == "Soccer"
+                              select items;
+            return View(await (querySoccer).Include(x => x.Image).ToListAsync());
+
+        }
+        public async Task<IActionResult> Baseball(Produit produit)
+        {
+            var queryBase = from items in _context.Produit
+                              where items.Sport == "Baseball"
+                              select items;
+            return View(await (queryBase).Include(x => x.Image).ToListAsync());
+  
+        }
+        public async Task<IActionResult> Velo(Produit produit)
+        {
+            var queryVelo = from items in _context.Produit
+                              where items.Sport == "Velo"
+                              select items;
+            return View(await (queryVelo).Include(x => x.Image).ToListAsync());
+
+        }
+
+        //GET: Produit/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,7 +82,7 @@ namespace GOASS.Controllers
 
             return View(produit);
         }
-
+        //[Authorize (Roles= "Administrateur")]
         // GET: Produit/Create
         public IActionResult Create()
         {
@@ -66,7 +94,8 @@ namespace GOASS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProduitID,NomProduit,Description,Marque,Taille,Quantité,Sport, ImageID")] Produit produit)
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> Create([Bind("ProduitID,NomProduit,Description,Marque,Taille,Quantité,Sport, Prix, ImageID")] Produit produit)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +119,6 @@ namespace GOASS.Controllers
 
                     produit.ImageID = img.ImageID;
                 }
-
                 _context.Add(produit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +126,7 @@ namespace GOASS.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Administrateur")]
         // GET: Produit/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -120,7 +149,8 @@ namespace GOASS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProduitID,NomProduit,Description,Marque,Taille,Quantité,Sport, ImageID")] Produit produit)
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> Edit(int id, [Bind("ProduitID,NomProduit,Description,Marque,Taille,Quantité,Sport,Prix, ImageID")] Produit produit)
         {
             if (id != produit.ProduitID)
             {
@@ -181,6 +211,7 @@ namespace GOASS.Controllers
         }
 
         // GET: Produit/Delete/5
+        [Authorize(Roles = "Administrateur")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -197,7 +228,7 @@ namespace GOASS.Controllers
 
             return View(produit);
         }
-
+        [Authorize]
         public async Task<IActionResult> AjoutPanier(int? id)
         {
             if (id == null)
@@ -241,6 +272,7 @@ namespace GOASS.Controllers
         // POST: Produit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrateur")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var produit = await _context.Produit.FindAsync(id);

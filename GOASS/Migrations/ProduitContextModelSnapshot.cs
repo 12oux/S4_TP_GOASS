@@ -65,6 +65,9 @@ namespace GOASS.Migrations
                     b.Property<int>("CommandeID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ImageID")
+                        .HasColumnType("int");
+
                     b.Property<double>("MontantUnitaire")
                         .HasColumnType("float");
 
@@ -77,6 +80,8 @@ namespace GOASS.Migrations
                     b.HasKey("ItemCommandeID");
 
                     b.HasIndex("CommandeID");
+
+                    b.HasIndex("ImageID");
 
                     b.HasIndex("ProduitID");
 
@@ -174,6 +179,10 @@ namespace GOASS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GOASS.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
+
                     b.HasOne("GOASS.Models.Produit", "Produit")
                         .WithMany()
                         .HasForeignKey("ProduitID")
@@ -181,6 +190,8 @@ namespace GOASS.Migrations
                         .IsRequired();
 
                     b.Navigation("Commande");
+
+                    b.Navigation("Image");
 
                     b.Navigation("Produit");
                 });

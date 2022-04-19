@@ -1,7 +1,6 @@
 using GOASS.Config;
 using GOASS.Data;
 using GOASS.Models;
-using GOASS.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,11 +38,15 @@ namespace GOASS
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-            services.AddTransient<IMailService, Services.MailService>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+   
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddDefaultTokenProviders()
+                    .AddDefaultUI()
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -80,6 +83,37 @@ namespace GOASS
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            string[] roleNames = { "Administrateur", "Utilisateur" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            IdentityUser user = await UserManager.FindByEmailAsync("courrielTI@cstjean.qc.ca");
+
+            if (user == null)
+            {
+                user = new IdentityUser()
+                {
+                    UserName = "courrielTI@cstjean.qc.ca",
+                    Email = "courrielTI@cstjean.qc.ca",
+                    SecurityStamp = Guid.NewGuid().ToString("D"),
+                    
+                };
+                await UserManager.CreateAsync(user, "179P@ssw0rd");
+            }
+            await UserManager.AddToRoleAsync(user, "Administrateur");
+        }
 
         private static void UpdateDatabase(IApplicationBuilder app)
         {
@@ -90,6 +124,7 @@ namespace GOASS
                 using(var context = serviceScope.ServiceProvider.GetService<ProduitContext>())
                 {
                     context.Database.Migrate();
+
                 }
                 using (var evalContext = serviceScope.ServiceProvider.GetService<EvalContext>())
                 {
@@ -99,14 +134,15 @@ namespace GOASS
             }
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             var context = services.GetRequiredService<ProduitContext>();
             var context2 = services.GetRequiredService<EvalContext>();
 
-            DbInitializer.Initialize(context);
+
+            //DbInitializer.Initialize(context);
+            UpdateDatabase(app);
 
             if (env.IsDevelopment())
             {
@@ -119,6 +155,8 @@ namespace GOASS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            CreateRoles(services).Wait();
 
             StripeConfiguration.ApiKey = Configuration.GetValue<string>("Stripe:SecretKey");
 

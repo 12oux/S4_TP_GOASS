@@ -11,6 +11,6 @@ namespace GOASS.Models
         public string UserGuid { get; set; }
         public List<ItemCommande> Items { get; set; }
 
-        //public ItemCommande ItemCommande { get; set; }
+
     }
 }

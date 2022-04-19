@@ -1,0 +1,49 @@
+﻿@model GOASS.Models.ItemCommande
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ItemCommande</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ItemCommandeID" />
+            <div class="form-group">
+                <label asp-for="ProduitID" class="control-label"></label>
+                <select asp-for="ProduitID" class="form-control" asp-items="ViewBag.ProduitID"></select>
+                <span asp-validation-for="ProduitID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommandeID" class="control-label"></label>
+                <select asp-for="CommandeID" class="form-control" asp-items="ViewBag.CommandeID"></select>
+                <span asp-validation-for="CommandeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantite" class="control-label"></label>
+                <input asp-for="Quantite" class="form-control" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontantUnitaire" class="control-label"></label>
+                <input asp-for="MontantUnitaire" class="form-control" />
+                <span asp-validation-for="MontantUnitaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

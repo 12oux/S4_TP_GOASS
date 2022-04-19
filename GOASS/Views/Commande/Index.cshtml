@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GOASS.Models.Commande>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vos Commandes</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserGuid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommandeID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserGuid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommandeID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CommandeID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CommandeID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CommandeID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

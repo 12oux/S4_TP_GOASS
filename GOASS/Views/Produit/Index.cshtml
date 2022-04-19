@@ -6,9 +6,16 @@
 }
 
 <h1>Catalogue - Tout les produits</h1>
+<br />
+<br />
 
 <p>
     <a class="myButtonCenter" asp-action="Create">Créer</a>
+    <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Hockey"><i class="fa-solid fa-hockey-puck"></i>Hockey</a>
+    <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Soccer"><i class="fa-solid fa-futbol"></i> Soccer</a>
+    <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Baseball"><i class="fa-solid fa-baseball-bat-ball"></i> Baseball</a>
+    <a class="myButtonCenter" asp-area="" asp-controller="Produit" asp-action="Velo"><i class="fa-solid fa-bicycle"></i> Vélo</a>
+
 </p>
 <table class="table col-md-12 col-sm-12">
     <thead>
@@ -37,7 +44,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Prix)
             </th>
-            <th></th>
+            <th>
+                Panier
+            </th>
+            <th>
+                Détails
+            </th>
+            <th>
+                Options Admin
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -71,13 +86,17 @@
                 @Html.DisplayFor(modelItem => item.Prix)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProduitID">Modifier</a> |
-                <a asp-action="Details" asp-route-id="@item.ProduitID">Détails</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProduitID">Supprimer</a> |
-                @if(User.FindFirstValue(ClaimTypes.Name) !=null)
+                @if (User.FindFirstValue(ClaimTypes.Name) != null)
                 {
-                    <a asp-action="AjoutPanier" asp-route-id="@item.ProduitID">Ajouter au panier</a>
+                    <a asp-action="AjoutPanier" asp-route-id="@item.ProduitID"><i class="fa-solid fa-cart-shopping fa-2x text-success"></i></a>
                 }
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ProduitID"><i class="fa-solid fa-clipboard-list fa-2x text-dark"></i></a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProduitID">Modifier</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProduitID">Supprimer</a>
             </td>
         </tr>
 }

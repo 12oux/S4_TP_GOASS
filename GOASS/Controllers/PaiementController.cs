@@ -1,10 +1,12 @@
 ﻿using GOASS.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace GOASS.Controllers
@@ -12,9 +14,11 @@ namespace GOASS.Controllers
     public class PaiementController : Controller
     {
         private readonly ProduitContext _context;
-        public PaiementController(ProduitContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public PaiementController(ProduitContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index(int ID)
@@ -69,7 +73,22 @@ namespace GOASS.Controllers
                 };
                 serviceCharge.Update(charge.Id, options);
 
-                foreach(var itemPanier in panier.ItemPanier)
+                var current_User = _userManager.GetUserAsync(HttpContext.User).Result;
+
+                SmtpClient smtpClient = new SmtpClient("smtp.office365.com", 587);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new System.Net.NetworkCredential("courrielTI@cstjean.qc.ca", "3ordercharactercorn67winwest");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("courrielTI@cstjean.qc.ca", "Courriel TI");
+                mail.To.Add(new MailAddress(current_User.Email));
+                mail.Subject = "Votre confirmation de commande chez GOASS";
+                mail.Body = "Votre commande:" + commande.CommandeID + "     Votre identifiant unique:" + commande.UserGuid + "     Vous pouvez accéder aux détails de la commande sur votre portail!" + "    Merci d'avoir magasiner chez GOASS, au plaisir de refaire affaires avec vous!"
+                    ;
+                smtpClient.Send(mail);
+
+                foreach (var itemPanier in panier.ItemPanier)
                 {
                     var itemCommande = new ItemCommande
                     {
@@ -90,22 +109,6 @@ namespace GOASS.Controllers
             }
             return View();
         }
-
-        //public IActionResult Historique(int CommandeID, int ItemCommandeID, int UserGuid)
-        //{
-        //    var commande = _context.Commande.Include(x => x.CommandeID);
-        //    Historique historique = new Historique
-        //    {
-
-        //        UserGuid = commande.UserGuid,
-        //        CommandeID = commande.CommandeID,
-        //        ItemCommandeID = commande.ItemCommandeID
-        //    };
-
-        //    ViewBag.CommandeID = commande.CommandeID;
-        //    ViewBag.UserGuid = commande.UserGuid;
-
-        //}
 
     }
 }
